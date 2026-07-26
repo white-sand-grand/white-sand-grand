@@ -1,6 +1,6 @@
 ## Hi there 👋, I'm White Sand Grand
 
-💼 一句自我介绍（方向 / 在做什么），随时替换成你自己的话。
+💼 A student who is learning Agent.
 
 ## 📊 GitHub Stats
 
