@@ -1,6 +1,19 @@
-## Hi there 👋, I'm White Sand Grand
+<div align="center">
 
-💼 A student who is learning Agent.
+<a href="https://git.io/typing-svg">
+  <img alt="typing header" src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=3000&pause=1000&center=true&vCenter=true&width=560&lines=Hi%2C+I'm+White+Sand+Grand;A+student+learning+AI+Agents;Seeking+Agent+open-source+collaborators">
+</a>
+
+**🎓 BUPT &amp; QMUL · Digital Media Technology (DMT)**
+
+💼 A student learning AI Agents — looking to build open-source Agent projects together.
+
+[![Email](https://img.shields.io/badge/Email-boya2007%40outlook.com-0078D4?style=flat-square&logo=microsoftoutlook&logoColor=white)](mailto:boya2007@outlook.com)
+![Profile Views](https://komarev.com/ghpvc/?username=white-sand-grand&color=0078D4&style=flat-square&label=Profile+Views)
+
+[![My Skills](https://skillicons.dev/icons?i=py,go,pytorch,docker,git,linux)](https://skillicons.dev)
+
+</div>
 
 ## 📊 GitHub Stats
 
