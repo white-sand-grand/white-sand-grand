@@ -42,9 +42,16 @@ jobs:
         run: |
           mkdir -p dist
           for asset in github-contribution-grid-snake.svg github-contribution-grid-snake-dark.svg; do
-            curl --fail --silent --show-error --location --retry 3 \
+            if curl --fail --silent --show-error --location --retry 3 \
+              --remove-on-error \
               --output "dist/$asset" \
-              "https://raw.githubusercontent.com/${{ github.repository }}/output/$asset"
+              "https://raw.githubusercontent.com/${{ github.repository }}/output/$asset"; then
+              echo "Restored $asset"
+            else
+              rm -f "dist/$asset"
+              echo "::warning::No previously published $asset to restore; \
+              relying on the freshly generated contribution snake."
+            fi
           done
 
       - name: Generate contribution snake
