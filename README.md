@@ -1,16 +1,29 @@
-## Hi there 👋
+## Hi there 👋, I'm White Sand Grand
 
-<!--
-**white-sand-grand/white-sand-grand** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## 📊 GitHub Stats
 
-Here are some ideas to get you started:
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-user-stats-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-user-stats.svg">
+  <img alt="GitHub statistics" src="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-user-stats.svg">
+</picture>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🏆 Language Proficiency
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-languages-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-languages.svg">
+  <img alt="GitHub language statistics" src="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-languages.svg">
+</picture>
+
+## 📦 Recent Work
+
+<![trpc-agent-go](https://github.com/white-sand-grand/trpc-agent-go)
+
+## 🐍 Contribution Snake
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-contribution-grid-snake.svg">
+  <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-contribution-grid-snake.svg">
+</picture>
