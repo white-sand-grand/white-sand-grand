@@ -1,5 +1,7 @@
 ## Hi there 👋, I'm White Sand Grand
 
+💼 一句自我介绍（方向 / 在做什么），随时替换成你自己的话。
+
 ## 📊 GitHub Stats
 
 <picture>
@@ -18,7 +20,7 @@
 
 ## 📦 Recent Work
 
-<![trpc-agent-go](https://github.com/white-sand-grand/trpc-agent-go)
+[![trpc-agent-go](https://github-readme-stats-ouuan.vercel.app/api/pin/?username=trpc-group&repo=trpc-agent-go&show_owner=true&description_lines_count=4)](https://github.com/trpc-group/trpc-agent-go)
 
 ## 🐍 Contribution Snake
 

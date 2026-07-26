@@ -1,0 +1,108 @@
+name: Generate profile assets
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: profile-assets
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+
+      - name: Generate static GitHub statistics
+        run: >-
+          python3 .github/scripts/generate_github_stats.py
+          --username "${{ github.repository_owner }}"
+          --output dist/github-user-stats.svg
+          --dark-output dist/github-user-stats-dark.svg
+          --language-output dist/github-languages.svg
+          --dark-language-output dist/github-languages-dark.svg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Restore last published contribution snakes
+        run: |
+          mkdir -p dist
+          for asset in github-contribution-grid-snake.svg github-contribution-grid-snake-dark.svg; do
+            curl --fail --silent --show-error --location --retry 3 \
+              --output "dist/$asset" \
+              "https://raw.githubusercontent.com/${{ github.repository }}/output/$asset"
+          done
+
+      - name: Generate contribution snake
+        id: snake
+        continue-on-error: true
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            generated-snakes/github-contribution-grid-snake.svg
+            generated-snakes/github-contribution-grid-snake-dark.svg?palette=github-dark
+
+      - name: Use newly generated contribution snakes
+        if: steps.snake.outcome == 'success'
+        run: cp generated-snakes/*.svg dist/
+
+      - name: Report contribution snake fallback
+        if: steps.snake.outcome == 'failure'
+        run: >-
+          echo "::warning::Contribution snake generation failed;
+          retaining the last validated snake assets."
+
+      - name: Validate generated SVGs
+        run: python3 .github/scripts/validate_profile_assets.py dist
+
+      - name: Upload validated profile assets
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: profile-assets
+          path: dist
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: generate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+
+      - name: Download validated profile assets
+        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: profile-assets
+          path: dist
+
+      - name: Revalidate downloaded SVGs
+        run: python3 .github/scripts/validate_profile_assets.py dist
+
+      - name: Publish profile assets to output branch
+        uses: crazy-max/ghaction-github-pages@df5cc2bfa78282ded844b354faee141f06b41865 # v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
