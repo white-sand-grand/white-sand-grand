@@ -576,7 +576,7 @@ def render_language_card(
                 f'<circle cx="{x}" cy="{y - 4}" r="4" fill="{color}"/>'
                 f'<text x="{x + 12}" y="{y}" class="label">{escape(name)}</text>'
                 f'<text x="{x + 148}" y="{y}" class="value" text-anchor="end">'
-                f'{format_percentage(value, code_total)}</text>'
+                f'{escape(format_percentage(value, code_total))}</text>'
             )
         code_legend = "".join(legend_parts)
     else:
