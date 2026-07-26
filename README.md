@@ -20,7 +20,7 @@
 
 ## 📦 Recent Work
 
-[![trpc-agent-go](https://github-readme-stats-ouuan.vercel.app/api/pin/?username=trpc-group&repo=trpc-agent-go&show_owner=true&description_lines_count=4)](https://github.com/trpc-group/trpc-agent-go)
+[![trpc-agent-go](https://github-readme-stats-ouuan.vercel.app/api/pin/?username=white-sand-grand&repo=trpc-agent-go&show_owner=true&description_lines_count=4)](https://github.com/white-sand-grand/trpc-agent-go)
 
 ## 🐍 Contribution Snake
 
