@@ -34,6 +34,7 @@
 ## 📦 Recent Work
 
 [![trpc-agent-go](https://github-readme-stats-ouuan.vercel.app/api/pin/?username=white-sand-grand&repo=trpc-agent-go&show_owner=true&description_lines_count=4)](https://github.com/white-sand-grand/trpc-agent-go)
+[![career-guide-for-students](https://github-readme-stats-ouuan.vercel.app/api/pin/?username=white-sand-grand&repo=career-guide-for-students&show_owner=true&description_lines_count=4)](https://github.com/white-sand-grand/career-guide-for-students)
 
 ## 🐍 Contribution Snake
 
