@@ -1,0 +1,24 @@
+<svg width="760" height="270" viewBox="0 0 760 270" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Language Overview</title>
+  <desc id="desc">Daily language statistics by code size and repository count. Leading languages: Go by code size and Go by repository count.</desc>
+  <style>
+    .title { font: 600 20px "Segoe UI", Ubuntu, sans-serif; fill: #0969da; }
+    .section { font: 600 11px "Segoe UI", Ubuntu, sans-serif; fill: #57606a; letter-spacing: 1px; }
+    .label { font: 400 13px "Segoe UI", Ubuntu, sans-serif; fill: #57606a; }
+    .value { font: 600 13px "Segoe UI", Ubuntu, sans-serif; fill: #24292f; }
+    .footer { font: 400 11px "Segoe UI", Ubuntu, sans-serif; fill: #6e7781; }
+  </style>
+  <rect x="0.5" y="0.5" width="759" height="269" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="28" y="38" class="title">Language Overview</text>
+  <path d="M28 55.5H732" stroke="#d8dee4"/>
+  <text x="28" y="78" class="section">BY CODE SIZE</text>
+  <rect x="28" y="91" width="326" height="11" rx="5.5" fill="#d8dee4"/>
+  <g clip-path="url(#code-size-bar)"><rect x="28.00" y="91" width="320.99" height="11" fill="#00add8"/><rect x="348.99" y="91" width="2.05" height="11" fill="#3178c6"/><rect x="351.04" y="91" width="1.64" height="11" fill="#f1e05a"/><rect x="352.68" y="91" width="0.68" height="11" fill="#3572a5"/><rect x="353.36" y="91" width="0.32" height="11" fill="#da5b0b"/><rect x="353.68" y="91" width="0.32" height="11" fill="#57606a"/></g>
+  <defs><clipPath id="code-size-bar"><rect x="28" y="91" width="326" height="11" rx="5.5"/></clipPath></defs>
+  <circle cx="32" cy="128" r="4" fill="#00add8"/><text x="44" y="132" class="label">Go</text><text x="180" y="132" class="value" text-anchor="end">98.5%</text><circle cx="198" cy="128" r="4" fill="#3178c6"/><text x="210" y="132" class="label">TypeScript</text><text x="346" y="132" class="value" text-anchor="end">0.6%</text><circle cx="32" cy="159" r="4" fill="#f1e05a"/><text x="44" y="163" class="label">JavaScript</text><text x="180" y="163" class="value" text-anchor="end">0.5%</text><circle cx="198" cy="159" r="4" fill="#3572a5"/><text x="210" y="163" class="label">Python</text><text x="346" y="163" class="value" text-anchor="end">0.2%</text><circle cx="32" cy="190" r="4" fill="#da5b0b"/><text x="44" y="194" class="label">Jupyter Notebook</text><text x="180" y="194" class="value" text-anchor="end">&lt;0.1%</text><circle cx="198" cy="190" r="4" fill="#57606a"/><text x="210" y="194" class="label">Other</text><text x="346" y="194" class="value" text-anchor="end">&lt;0.1%</text>
+  <path d="M380 72V226" stroke="#d8dee4"/>
+  <text x="407" y="78" class="section">BY REPOSITORY COUNT</text>
+  <text x="407" y="104" class="label">Go</text><rect x="535" y="96" width="150" height="8" rx="4" fill="#d8dee4"/><rect x="535" y="96" width="150.00" height="8" rx="4" fill="#00add8"/><text x="724" y="104" class="value" text-anchor="end">1</text><text x="407" y="128" class="label">Jupyter Notebook</text><rect x="535" y="120" width="150" height="8" rx="4" fill="#d8dee4"/><rect x="535" y="120" width="150.00" height="8" rx="4" fill="#da5b0b"/><text x="724" y="128" class="value" text-anchor="end">1</text><text x="407" y="152" class="label">TypeScript</text><rect x="535" y="144" width="150" height="8" rx="4" fill="#d8dee4"/><rect x="535" y="144" width="150.00" height="8" rx="4" fill="#3178c6"/><text x="724" y="152" class="value" text-anchor="end">1</text>
+  <path d="M28 242.5H732" stroke="#d8dee4"/>
+  <text x="28" y="260" class="footer">Based on 3 public repositories with detected languages · Updated daily · 2026-08-08 01:12 UTC</text>
+</svg>
