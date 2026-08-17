@@ -10,8 +10,9 @@
 
 [![Email](https://img.shields.io/badge/Email-boya2007%40outlook.com-0078D4?style=flat-square&logo=microsoftoutlook&logoColor=white)](mailto:boya2007@outlook.com)
 ![Profile Views](https://komarev.com/ghpvc/?username=white-sand-grand&color=0078D4&style=flat-square&label=Profile+Views)
+[![Awesome DSH Plugin](https://awesome-dsh-plugin.com/badge.svg)](https://awesome-dsh-plugin.com)
 
-[![My Skills](https://skillicons.dev/icons?i=py,go,pytorch,docker,git,linux)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=py,go,ts,react,pytorch,docker,git,linux,langchain,mcp)](https://skillicons.dev)
 
 </div>
 
