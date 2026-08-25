@@ -39,6 +39,24 @@ query($login: String!, $after: String) {
 }
 """
 
+CONTRIBUTIONS_QUERY = """
+query($login: String!) {
+  user(login: $login) {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
+      }
+    }
+  }
+}
+"""
+
 LANGUAGE_COLORS = {
     "C": "#555555",
     "C++": "#f34b7d",
@@ -64,6 +82,11 @@ FALLBACK_LANGUAGE_COLORS = (
     "#cf222e",
     "#0550ae",
 )
+
+CONTRIBUTION_LEVEL_COLORS = {
+    "light": ("#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"),
+    "dark": ("#161b22", "#033a16", "#196c2e", "#2ea043", "#56d364"),
+}
 
 THEMES = {
     "light": {
@@ -201,6 +224,39 @@ def fetch_affiliated_repositories(
         "rank uses the first 1,000 ordered by stars."
     )
     return repositories
+
+
+def fetch_contributions(username: str, token: str) -> dict[str, Any]:
+    response = request_json(
+        f"{API_ROOT}/graphql",
+        token,
+        {"query": CONTRIBUTIONS_QUERY, "variables": {"login": username}},
+    )
+    if not isinstance(response, dict):
+        raise GitHubAPIError("GitHub contributions response was invalid")
+    if response.get("errors"):
+        raise GitHubAPIError("GitHub contributions response contained errors")
+    try:
+        calendar = response["data"]["user"]["contributionsCollection"][
+            "contributionCalendar"
+        ]
+        total = calendar["totalContributions"]
+        raw_weeks = calendar["weeks"]
+        if not isinstance(total, int) or not isinstance(raw_weeks, list):
+            raise KeyError("contribution calendar")
+        weeks = [
+            [
+                {
+                    "count": day["contributionCount"],
+                    "date": datetime.strptime(day["date"], "%Y-%m-%d").date(),
+                }
+                for day in week["contributionDays"]
+            ]
+            for week in raw_weeks
+        ]
+    except (KeyError, TypeError, ValueError):
+        raise GitHubAPIError("GitHub contributions response was invalid") from None
+    return {"total": total, "weeks": weeks}
 
 
 def language_color(name: str, api_color: Optional[str] = None) -> str:
@@ -636,6 +692,79 @@ def render_language_card(
 '''
 
 
+def render_activity_card(
+    contributions: dict[str, Any], theme_name: str
+) -> str:
+    theme = THEMES[theme_name]
+    level_colors = CONTRIBUTION_LEVEL_COLORS[theme_name]
+    weeks = contributions["weeks"][-53:]
+    total = int(contributions["total"])
+    counts = [day["count"] for week in weeks for day in week]
+    maximum_count = max(counts, default=0)
+
+    def cell_color(count: int) -> str:
+        if count <= 0 or maximum_count <= 0:
+            return level_colors[0]
+        level = min(4, 1 + int(3 * count / maximum_count))
+        return level_colors[level]
+
+    cell_size = 10
+    pitch = 13
+    origin_x = 32.0
+    origin_y = 100
+    cells = []
+    month_labels = []
+    last_month = None
+    last_label_column = -3
+    for column_index, week in enumerate(weeks):
+        padded_days = (week + [None] * 7)[:7]
+        first_day = padded_days[0]["date"] if padded_days[0] else None
+        month = first_day.strftime("%b") if first_day else ""
+        if month and month != last_month:
+            if column_index - last_label_column >= 3:
+                month_labels.append(
+                    f'<text x="{origin_x + column_index * pitch:g}" y="92" '
+                    f'class="month">{escape(month)}</text>'
+                )
+                last_label_column = column_index
+            last_month = month
+        for day_index, day in enumerate(padded_days):
+            if day is None:
+                continue
+            cells.append(
+                f'<rect x="{origin_x + column_index * pitch:g}" '
+                f'y="{origin_y + day_index * pitch}" '
+                f'width="{cell_size}" height="{cell_size}" rx="2" '
+                f'fill="{cell_color(int(day["count"]))}"/>'
+            )
+
+    dates = [day["date"] for week in weeks for day in week]
+    end_date = dates[-1].strftime("%B %d, %Y") if dates else ""
+    year_suffix = f"in the year to {escape(end_date)}" if end_date else ""
+    updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+    return f'''<svg width="760" height="232" viewBox="0 0 760 232" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Contribution Activity</title>
+  <desc id="desc">Daily GitHub contribution counts over the last year, {format_value(total)} contributions in total.</desc>
+  <style>
+    .title {{ font: 600 20px "Segoe UI", Ubuntu, sans-serif; fill: {theme["accent"]}; }}
+    .label {{ font: 400 13px "Segoe UI", Ubuntu, sans-serif; fill: {theme["label"]}; }}
+    .value {{ font: 600 13px "Segoe UI", Ubuntu, sans-serif; fill: {theme["value"]}; }}
+    .month {{ font: 400 9px "Segoe UI", Ubuntu, sans-serif; fill: {theme["label"]}; }}
+    .footer {{ font: 400 11px "Segoe UI", Ubuntu, sans-serif; fill: {theme["footer"]}; }}
+  </style>
+  <rect x="0.5" y="0.5" width="759" height="231" rx="8" fill="{theme["background"]}" stroke="{theme["border"]}"/>
+  <text x="28" y="38" class="title">Contribution Activity</text>
+  <path d="M28 55.5H732" stroke="{theme["divider"]}"/>
+  <text x="28" y="78"><tspan class="value">{format_value(total)} contributions</tspan><tspan class="label">&#160;{year_suffix}</tspan></text>
+  {''.join(month_labels)}
+  {''.join(cells)}
+  <path d="M28 204.5H732" stroke="{theme["divider"]}"/>
+  <text x="28" y="220" class="footer">Updated daily · {updated_at}</text>
+</svg>
+'''
+
+
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate a static GitHub profile card")
     parser.add_argument("--username", required=True)
@@ -643,6 +772,8 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--dark-output", type=Path)
     parser.add_argument("--language-output", type=Path)
     parser.add_argument("--dark-language-output", type=Path)
+    parser.add_argument("--activity-output", type=Path)
+    parser.add_argument("--dark-activity-output", type=Path)
     return parser.parse_args()
 
 
@@ -715,6 +846,17 @@ def main() -> int:
                     render_language_card(language_repositories, theme_name),
                 )
                 for output, theme_name in language_cards
+            )
+        activity_cards = []
+        if arguments.activity_output:
+            activity_cards.append((arguments.activity_output, "light"))
+        if arguments.dark_activity_output:
+            activity_cards.append((arguments.dark_activity_output, "dark"))
+        if activity_cards:
+            contributions = fetch_contributions(arguments.username, token)
+            rendered_cards.extend(
+                (output, render_activity_card(contributions, theme_name))
+                for output, theme_name in activity_cards
             )
     except GitHubAPIError as error:
         print(f"::error::{error}")

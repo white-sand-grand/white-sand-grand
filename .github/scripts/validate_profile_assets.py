@@ -10,6 +10,8 @@ EXPECTED_FILES = (
     "github-user-stats-dark.svg",
     "github-languages.svg",
     "github-languages-dark.svg",
+    "github-activity.svg",
+    "github-activity-dark.svg",
     "github-contribution-grid-snake.svg",
     "github-contribution-grid-snake-dark.svg",
 )
@@ -27,11 +29,15 @@ THEME_MARKERS = {
     "github-user-stats-dark.svg": ("#0d1117", "#c9d1d9"),
     "github-languages.svg": ("#ffffff", "#24292f"),
     "github-languages-dark.svg": ("#0d1117", "#c9d1d9"),
+    "github-activity.svg": ("#ffffff", "#24292f"),
+    "github-activity-dark.svg": ("#0d1117", "#c9d1d9"),
 }
 
 CONTENT_MARKERS = {
     "github-languages.svg": ("by code size", "by repository count"),
     "github-languages-dark.svg": ("by code size", "by repository count"),
+    "github-activity.svg": ("contributions",),
+    "github-activity-dark.svg": ("contributions",),
 }
 
 

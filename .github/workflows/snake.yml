@@ -35,6 +35,8 @@ jobs:
           --dark-output dist/github-user-stats-dark.svg
           --language-output dist/github-languages.svg
           --dark-language-output dist/github-languages-dark.svg
+          --activity-output dist/github-activity.svg
+          --dark-activity-output dist/github-activity-dark.svg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
