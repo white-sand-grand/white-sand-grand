@@ -40,14 +40,6 @@
   <img alt="GitHub language statistics" src="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-languages.svg">
 </picture>
 
-## 📈 Contribution Activity
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-activity-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-activity.svg">
-  <img alt="GitHub contribution activity" src="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-activity.svg">
-</picture>
-
 ## 📦 Recent Work
 
 [![trpc-agent-go](https://github-readme-stats-ouuan.vercel.app/api/pin/?username=white-sand-grand&repo=trpc-agent-go&show_owner=true&description_lines_count=4)](https://github.com/white-sand-grand/trpc-agent-go)
