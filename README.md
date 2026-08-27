@@ -24,14 +24,6 @@
   <img alt="GitHub statistics" src="https://raw.githubusercontent.com/white-sand-grand/white-sand-grand/output/github-user-stats.svg">
 </picture>
 
-## 🔥 Contribution Streak
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=white-sand-grand&theme=github-dark&hide_border=true">
-  <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com?user=white-sand-grand&theme=github&hide_border=true">
-  <img alt="GitHub contribution streak" src="https://streak-stats.demolab.com?user=white-sand-grand&theme=github&hide_border=true">
-</picture>
-
 ## 🏆 Language Proficiency
 
 <picture>
